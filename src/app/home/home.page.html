@@ -1,0 +1,63 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button (click)="openHelp()">
+                <ion-icon slot="icon-only" name="help-circle-outline"></ion-icon>
+            </ion-button>
+            <ion-button (click)="openSetting()">
+                <ion-icon slot="icon-only" name="cog-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>
+            /dev/bus/usb/002/002
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-toggle color="primary"></ion-toggle>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true">
+    <div id="container" [innerHtml]="data">
+
+    </div>
+</ion-content>
+<ion-footer class="ion-no-border">
+    <ion-toolbar class="footer-frist-toolbar">
+        <ion-row class="ion-text-center">
+            <ion-col size="3">发送:10B</ion-col>
+            <ion-col size="3">接收:266B</ion-col>
+            <ion-col size="3" (click)="clearData()">
+                <ion-icon style="margin: 0 2px -2px 0;" name="trash"></ion-icon>清空
+            </ion-col>
+            <ion-col size="3" (click)="scrollToTop()">
+                <ion-icon style="margin: 0 2px -2px 0;" name="arrow-up-outline"></ion-icon>返回顶部
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+    <ion-toolbar>
+        <ion-item>
+            <ion-label position="stacked">指令发送</ion-label>
+            <ion-textarea [rows]="textareaRow" value="3A011101020000DCEDEE" [(ngModel)]="instructions"
+                placeholder="输入Hex字符串"></ion-textarea>
+        </ion-item>
+        <ion-buttons slot="end">
+            <ion-button class="send-btn">
+                <ion-icon slot="icon-only" name="checkmark-circle-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+    <ion-toolbar>
+        <ion-row class="ion-text-center">
+            <ion-col size="3">
+                <ion-checkbox class="checkbox-margin"></ion-checkbox><span class="checkbox-span">HEX</span>
+            </ion-col>
+            <ion-col size="4">
+                <ion-checkbox class="checkbox-margin"></ion-checkbox><span class="checkbox-span">自动重发</span>
+            </ion-col>
+            <ion-col size="5">
+                <ion-input class="resend-time-input" placeholder="默认重发:1000ms"></ion-input>
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-footer>
