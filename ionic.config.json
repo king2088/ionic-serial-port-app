@@ -1,5 +1,7 @@
 {
   "name": "serialport",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

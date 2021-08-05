@@ -38,7 +38,7 @@
     <ion-toolbar>
         <ion-item>
             <ion-label position="stacked">指令发送</ion-label>
-            <ion-textarea [rows]="textareaRow" value="3A011101020000DCEDEE" [(ngModel)]="instructions"
+            <ion-textarea style="max-height:90px" [autoGrow]="true" id="textarea" [rows]="textareaRow" value="3A011101020000DCEDEE" [(ngModel)]="instructions"
                 placeholder="输入Hex字符串"></ion-textarea>
         </ion-item>
         <ion-buttons slot="end">

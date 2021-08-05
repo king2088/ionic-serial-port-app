@@ -32,15 +32,24 @@ export class HomePage {
         00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
         00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 29 5E EE</div>
       `
-      this.instructions = '3A011101020000DCEDEE'
-      this.textareaRow = Math.round(this.instructions.length/33)
-      console.log('====================================');
-      console.log('this.textareaRow', this.textareaRow);
-      console.log('====================================');
+    this.instructions = '3A011101020000DCEDEE'
+    this.textareaRow = Math.round(this.instructions.length / 33)
+    console.log('====================================');
+    console.log('this.textareaRow', this.textareaRow);
+    console.log('====================================');
+    setTimeout(() => {
+      this.data = `${this.data}<div>11:42:03.344 - 3A 01 11 01 02 03 04 FF D5 22 36 EE</div>
+        <div>11:42:03.544 ->> A3 01 11 01 02 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+          00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+          00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+          00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+          00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 29 5E EE</div>`
+      this.scrollToBottom()
+    }, 8000)
   }
 
   addContent() {
-    
+
   }
 
   clearData() {
@@ -63,7 +72,7 @@ export class HomePage {
     })
     return await modal.present()
   }
-  
+
   async openHelp() {
     let modal = await this.modalCtrl.create({
       component: HelpPage,
