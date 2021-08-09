@@ -157,6 +157,7 @@ export class HomePage {
   formatHexString() {
     if (this.isWriterHex) {
       this.pack = this.pack.replace(/\ /g, '')
+      this.pack = this.pack.replace(/\n|\r/g, '')
     }
   }
 
@@ -207,6 +208,7 @@ export class HomePage {
    */
   clearData() {
     this.receiveData = ''
+    this.receiveDataArray = []
     this.sendLength = 0
     this.receiveLength = 0
   }

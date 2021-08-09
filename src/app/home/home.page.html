@@ -37,7 +37,7 @@
         <ion-item>
             <ion-label position="stacked">指令发送</ion-label>
             <ion-textarea style="max-height:90px" [autoGrow]="true" id="textarea" [rows]="1" [(ngModel)]="pack"
-                [placeholder]="packPlaceholder" (ionChange)="formatHexString()"></ion-textarea>
+                [placeholder]="packPlaceholder" (ionChange)="formatHexString()" (ionBlur)="formatHexString()"></ion-textarea>
         </ion-item>
         <ion-buttons slot="end">
             <ion-button class="send-btn" (click)="writerSerial()">
