@@ -8,20 +8,25 @@
 <ion-content>
     <ion-list>
         <ion-item>
-            <ion-label position="floating">波特率</ion-label>
-            <ion-input placeholder="默认为9600"></ion-input>
+            <ion-label position="stacked">波特率</ion-label>
+            <ion-input placeholder="默认为9600" [value]="config.baudRate"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label position="floating">数据位</ion-label>
-            <ion-input placeholder="默认为8"></ion-input>
+            <ion-label position="stacked">数据位</ion-label>
+            <ion-input placeholder="默认为8" [value]="config.dataBits"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label position="floating">停止位</ion-label>
-            <ion-input placeholder="默认为1"></ion-input>
+            <ion-label position="stacked">停止位</ion-label>
+            <ion-input placeholder="默认为1" [value]="config.stopBits"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label position="floating">校验位</ion-label>
-            <ion-input placeholder="默认为0"></ion-input>
+            <ion-label position="stacked">校验位</ion-label>
+            <ion-input placeholder="默认为0" [value]="config.parity"></ion-input>
           </ion-item>
     </ion-list>
 </ion-content>
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    version: {{version}}
+  </ion-toolbar>
+</ion-footer>

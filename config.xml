@@ -3,7 +3,7 @@
     <name>USPT</name>
     <description>USB serial port tool.</description>
     <author email="king6180@gmail.com" href="http://github.com/king2088">Tony Tao</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://localhost:8103" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -98,4 +98,6 @@
     <plugin name="cordova-plugin-splashscreen" spec="5.0.2" />
     <plugin name="cordova-plugin-ionic-webview" spec="^4.0.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
+    <allow-navigation href="http://localhost:8102" sessionid="43487fab" />
+    <allow-navigation href="http://localhost:8103" sessionid="23653d2e" />
 </widget>
