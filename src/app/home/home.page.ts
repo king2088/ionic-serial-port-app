@@ -35,7 +35,15 @@ export class HomePage {
     private nativeStorage: NativeStorage,
     private zone: NgZone,
     private utils: Utils
-  ) {}
+  ) { }
+
+  toggleChange() {
+    if (this.openStatus) {
+      this.openSerialPort()
+    } else {
+      this.closeSerial()
+    }
+  }
 
   /**
    * open serial
@@ -63,8 +71,12 @@ export class HomePage {
           this.receiveDataArray.push(view)
           this.timer = setTimeout(() => {
             this.zone.run(() => {
-              let date = `${this.utils.formatDate(new Date(), 'hh:mm:ss')}.${this.ms}`
+              let dateMs = this.ms < 10 ? '00' + this.ms : this.ms < 100 ? '0' + this.ms : this.ms
+              let date = `<span style="color: #2fdf75">${this.utils.formatDate(new Date(), 'hh:mm:ss')}.${dateMs}</span>`
               let result_uint8Array = this.utils.concatUint(Uint8Array, ...this.receiveDataArray)
+              if(!this.utils.bytes2HexString(result_uint8Array)) {
+                return
+              }
               this.receiveData += `${date} -> ${this.utils.strDivision(this.utils.bytes2HexString(result_uint8Array), 2)}`
               this.receiveData += `<div style="margin-top:8px"></div>`
               this.receiveLength = this.utils.bytes2HexString(result_uint8Array).length / 2
@@ -79,7 +91,7 @@ export class HomePage {
       })
     }, err => {
       console.log(`Get permission error: ${err}`);
-      if(this.openStatus) {
+      if (this.openStatus) {
         this.zone.run(() => {
           this.openStatus = false
         })
@@ -94,21 +106,31 @@ export class HomePage {
    * @memberof HomePage
    */
   writerSerial() {
+    if(!this.openStatus) return
     this.receiveDataArray = []
+    clearInterval(this.msTimer)
+    this.ms = 0
     this.msTimer = setInterval(() => {
       this.ms += 1
-    },1)
+      if(this.ms ==1000) {
+        this.ms = 0
+      }
+    }, 1)
     if (this.isWriterHex) {
       usbSerialPort.writeHex(this.pack, (res: any) => {
         console.log('writer res: ', res)
-        let date = `${this.utils.formatDate(new Date(), 'hh:mm:ss')}.${this.ms}`
+        let dateMs = this.ms < 10 ? '00' + this.ms : this.ms < 100 ? '0' + this.ms : this.ms
+        let date = `<span style="color:#3880ff">${this.utils.formatDate(new Date(), 'hh:mm:ss')}.${dateMs}</span>`
         this.receiveData += `<div>${date} <- ${this.utils.strDivision(this.pack, 2)}</div>`
+        this.sendLength = this.pack.length / 2
       })
     } else {
       usbSerialPort.write(this.pack, (res: any) => {
         console.log('writer res: ', res)
-        let date = `${this.utils.formatDate(new Date(), 'hh:mm:ss')}.${this.ms}`
+        let dateMs = this.ms < 10 ? '00' + this.ms : this.ms < 100 ? '0' + this.ms : this.ms
+        let date = `<span style="color:#3880ff">${this.utils.formatDate(new Date(), 'hh:mm:ss')}.${dateMs}</span>`
         this.receiveData += `<div>${date} <- ${this.utils.strDivision(this.utils.bufToHex(this.utils.stringToBytes(this.pack)), 2)}</div>`
+        this.sendLength = this.utils.getStringByteLength(this.pack)
       })
     }
   }
@@ -128,14 +150,25 @@ export class HomePage {
   }
 
   /**
+   * Format Hex string
+   *
+   * @memberof HomePage
+   */
+  formatHexString() {
+    if (this.isWriterHex) {
+      this.pack = this.pack.replace(/\ /g, '')
+    }
+  }
+
+  /**
    * Use hex checkbox change
    *
    * @memberof HomePage
    */
-  hexChange(){
-    if(this.isWriterHex) {
+  hexChange() {
+    if (this.isWriterHex) {
       this.packPlaceholder = '输入Hex字符串'
-    }else {
+    } else {
       this.packPlaceholder = '输入字符串'
     }
   }
@@ -145,12 +178,13 @@ export class HomePage {
    *
    * @memberof HomePage
    */
-  autoSendChange(){
-    if(this.isAutoSend) {
+  autoSendChange() {
+    if(!this.openStatus) return
+    if (this.isAutoSend) {
       this.autoSendTimer = setInterval(() => {
         this.writerSerial()
       }, this.reSendTime ? this.reSendTime : 1000)
-    }else {
+    } else {
       clearInterval(this.autoSendTimer)
     }
   }
@@ -173,6 +207,8 @@ export class HomePage {
    */
   clearData() {
     this.receiveData = ''
+    this.sendLength = 0
+    this.receiveLength = 0
   }
 
   /**

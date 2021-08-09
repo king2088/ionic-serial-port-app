@@ -65,6 +65,28 @@ export class Utils {
     }
 
     /**
+     * Get string byte length
+     *
+     * @param {string} str
+     * @returns
+     * @memberof Utils
+     */
+    getStringByteLength(str: string) {
+        var byteLen = 0, len = str.length;
+        if (str) {
+            for (var i = 0; i < len; i++) {
+                if (str.charCodeAt(i) > 255) {
+                    byteLen += 2;
+                }
+                else {
+                    byteLen++;
+                }
+            }
+            return byteLen;
+        }
+    }
+
+    /**
      * Split string by size
      * use strDivision('ABCD',2), return 'AB CD'
      * @param {string} str

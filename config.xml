@@ -3,7 +3,7 @@
     <name>USPT</name>
     <description>USB serial port tool.</description>
     <author email="king6180@gmail.com" href="http://github.com/king2088">Tony Tao</author>
-    <content original-src="index.html" src="http://localhost:8103" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
