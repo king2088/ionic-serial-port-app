@@ -74,6 +74,9 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+  ion-toolbar{
+    --opacity: 1
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -237,4 +240,54 @@
 
 .ion-toast-width {
   --width: 220px;
+}
+
+.color{
+  height: 30px;
+  border: 5px #ccc solid;
+  &-white{
+      background-color: white;
+  }
+  &-red{
+      background-color: red;
+      color: #fff;
+  }
+  &-blue{
+    background-color: blue;
+    color: #fff;
+  }
+  &-cyan{
+      background-color: cyan;
+      color: #fff;
+  }
+  &-yellow{
+      background-color: yellow;
+  }
+  &-green{
+      background-color: greenyellow;
+  }
+  &-black{
+      background-color: black;
+      color: #fff;
+  }
+  &-cornsilk{
+    background-color: cornsilk;
+  }
+  &-darkviolet{
+    background-color: darkviolet;
+    color: #fff;
+  }
+  &-gainsboro{
+    background-color: gainsboro;
+  }
+  &-maroon{
+    background-color: maroon;
+    color: #fff;
+  }
+  &-pink{
+    background-color: pink;
+  }
+  &-active{
+    border: 5px #2e6967 solid;
+  }
 }

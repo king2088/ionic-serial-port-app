@@ -13,7 +13,7 @@ import { SafeHtmlPipe } from '../pipe/safeHtml.pipe';
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    HomePageRoutingModule,
   ],
   declarations: [HomePage, SafeHtmlPipe]
 })

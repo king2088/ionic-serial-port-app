@@ -26,6 +26,7 @@ export class HomePage {
   openStatus: boolean = false
   reSendTime: number = null
   autoSendTimer: any
+  backgroundClass: string = ''
   @ViewChild(IonContent) content: IonContent
   constructor(
     private modalCtrl: ModalController,
@@ -39,6 +40,12 @@ export class HomePage {
 
   ionViewDidEnter() {
     this.initTextareaStyle()
+    // init background class
+    this.nativeStorage.getItem('backgroundClass').then(cssClass => {
+      this.backgroundClass = cssClass
+    }, () => {
+      this.backgroundClass = ''
+    })
   }
   /**
    * When the app is opened for the first time, the height of ion textarea is 0
@@ -235,10 +242,13 @@ export class HomePage {
    *
    * @memberof HomePage
    */
-  closeSerial() {
+  closeSerial(isOpenSerial?: boolean) {
     usbSerialPort.close(() => {
       this.isOpen()
       this.receiveDataArray = []
+      if(isOpenSerial) {
+        this.openSerialPort()
+      }
     })
   }
 
@@ -283,6 +293,12 @@ export class HomePage {
       component: SettingsPage,
       swipeToClose: true,
       presentingElement: this.routerOutlet.nativeEl
+    })
+    modal.onDidDismiss().then(async ()=>{
+      // 关闭串口再重新开启
+      this.closeSerial(true)
+      // 设置背景颜色
+      this.backgroundClass = await this.nativeStorage.getItem('backgroundClass')
     })
     return await modal.present()
   }

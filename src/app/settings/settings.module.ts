@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { SettingsPage } from './settings.page';
-
 import { SettingsPageRoutingModule } from './settings-routing.module';
 
 
@@ -12,7 +11,7 @@ import { SettingsPageRoutingModule } from './settings-routing.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    SettingsPageRoutingModule
+    SettingsPageRoutingModule,
   ],
   declarations: [SettingsPage]
 })

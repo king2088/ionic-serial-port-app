@@ -1,7 +1,7 @@
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { AppVersion } from '@ionic-native/app-version/ngx';
-import { Component, ViewChild } from '@angular/core';
-import { ModalController, IonContent } from '@ionic/angular';
+import { Component } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 
 @Component({
@@ -12,14 +12,27 @@ import { ModalController, IonContent } from '@ionic/angular';
 export class SettingsPage {
   version: any = ''
   config: object = {}
-  @ViewChild(IonContent) content: IonContent
+  colorList: any[] = [
+    'color-white',
+    'color-red',
+    'color-blue',
+    'color-cyan',
+    'color-yellow',
+    'color-green',
+    'color-black',
+    'color-cornsilk',
+    'color-darkviolet',
+    'color-gainsboro',
+    'color-maroon',
+    'color-pink',
+  ]
   constructor(
-    private modalCtrl: ModalController,
     private appVersion: AppVersion,
-    private nativeStorage: NativeStorage
+    private nativeStorage: NativeStorage,
+    private modalController: ModalController
   ) {
     this.getVersion()
-    this.getSerialportConfig()
+    this.getSerialPortConfig()
   }
 
   /**
@@ -36,9 +49,19 @@ export class SettingsPage {
    *
    * @memberof SettingsPage
    */
-  async getSerialportConfig() {
+  async getSerialPortConfig() {
     this.config = await this.nativeStorage.getItem('config')
     console.log('config', this.config);
-    
   }
+
+  async setSerialPortConfig() {
+    await this.nativeStorage.setItem('config', this.config)
+    this.modalController.dismiss()
+  }
+
+  async setBackgroundColor(className: string) {
+    await this.nativeStorage.setItem('backgroundClass', className)
+    this.modalController.dismiss()
+  }
+
 }

@@ -18,7 +18,7 @@
 </ion-header>
 
 <ion-content [scrollEvents]="true">
-    <div id="container" [innerHtml]="receiveData | html"></div>
+    <div id="container" [class]="backgroundClass" [innerHtml]="receiveData | html"></div>
 </ion-content>
 <ion-footer class="ion-no-border">
     <ion-toolbar class="footer-frist-toolbar" color="light">

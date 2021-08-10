@@ -19,7 +19,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.setSerialPortDefaultConfig()
       this.statusBar.styleLightContent()
-      this.statusBar.backgroundColorByHexString('#428cff')
+      this.statusBar.backgroundColorByHexString('#3880ff')
       this.useBackgroundMode()
     })
     
