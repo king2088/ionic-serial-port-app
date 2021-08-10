@@ -1,3 +1,4 @@
+import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 import { Component } from '@angular/core';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -12,12 +13,14 @@ export class AppComponent {
   constructor(
     private nativeStorage: NativeStorage,
     private statusBar: StatusBar,
-    private platform: Platform
+    private platform: Platform,
+    private backgroundMode: BackgroundMode
   ) {
     this.platform.ready().then(() => {
       this.setSerialPortDefaultConfig()
       this.statusBar.styleLightContent()
       this.statusBar.backgroundColorByHexString('#428cff')
+      this.useBackgroundMode()
     })
     
   }
@@ -44,4 +47,26 @@ export class AppComponent {
       await this.nativeStorage.setItem('config', config)
     })
   }
+
+  /**
+   * Enable background mode
+   *
+   * @memberof AppComponent
+   */
+  useBackgroundMode() {
+    this.platform.resume.subscribe(() => {
+      console.log('------------App Resum------------')
+      if(this.backgroundMode.isEnabled()) {
+        this.backgroundMode.disable()
+      }
+    })
+    this.platform.pause.subscribe(() => {
+      console.log('------------App Pause------------')
+      this.backgroundMode.setDefaults({
+        silent: true
+      })
+      this.backgroundMode.enable()
+    })
+  }
+
 }

@@ -1,6 +1,6 @@
 import { SettingsPage } from './../settings/settings.page';
 import { Component, NgZone, ViewChild } from '@angular/core';
-import { ModalController, IonContent, IonRouterOutlet, AlertController } from '@ionic/angular';
+import { ModalController, IonContent, IonRouterOutlet, AlertController, ToastController } from '@ionic/angular';
 import { HelpPage } from '../help/help.page';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { Utils } from '../../service/utils';
@@ -33,7 +33,8 @@ export class HomePage {
     private nativeStorage: NativeStorage,
     private zone: NgZone,
     private utils: Utils,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private toastController: ToastController
   ) { }
 
   ionViewDidEnter() {
@@ -98,7 +99,15 @@ export class HomePage {
               if (!this.utils.bytes2HexString(result_uint8Array)) {
                 return
               }
-              this.receiveData += `${date}${this.utils.strDivision(this.utils.bytes2HexString(result_uint8Array), 2)}`
+              this.receiveData += `
+                <div style="
+                  -webkit-user-select: auto;
+                  -moz-user-select: auto;
+                  -ms-user-select: auto;
+                  user-select: auto;">
+                  ${date}${this.utils.strDivision(this.utils.bytes2HexString(result_uint8Array), 2)}
+                </div>
+              `
               this.receiveData += `<div style="margin-top:8px"></div>`
               this.receiveLength = this.utils.bytes2HexString(result_uint8Array).length / 2
               this.scrollToBottom()
@@ -113,8 +122,10 @@ export class HomePage {
       if (this.openStatus) {
         this.zone.run(() => {
           this.openStatus = false
+          this.title = '串口设备'
         })
       }
+      this.presentToast('未连接任何USB设备')
     })
   }
 
@@ -140,6 +151,10 @@ export class HomePage {
         let date = `<span style="color:#3880ff">${this.utils.formatDate(now, 'hh:mm:ss')}.${dateMs} < </span>`
         this.receiveData += `<div>${date}${this.utils.strDivision(this.pack, 2)}</div>`
         this.sendLength = this.pack.length / 2
+      }, err => {
+        console.log('writer hex err: ', err);
+        this.presentToast()
+        this.closeSerial()
       })
     } else {
       usbSerialPort.write(this.pack, (res: any) => {
@@ -147,6 +162,10 @@ export class HomePage {
         let date = `<span style="color:#3880ff">${this.utils.formatDate(now, 'hh:mm:ss')}.${dateMs} < </span>`
         this.receiveData += `<div>${date}${this.utils.strDivision(this.utils.bufToHex(this.utils.stringToBytes(this.pack)), 2)}</div>`
         this.sendLength = this.utils.getStringByteLength(this.pack)
+      }, err => {
+        console.log('writer string err: ', err);
+        this.presentToast()
+        this.closeSerial()
       })
     }
   }
@@ -172,8 +191,10 @@ export class HomePage {
    */
   formatHexString() {
     if (this.isWriterHex) {
-      this.pack = this.pack.replace(/\ /g, '')
-      this.pack = this.pack.replace(/\n|\r/g, '')
+      this.zone.run(() => {
+        this.pack = this.pack.replace(/\ /g, '')
+        this.pack = this.pack.replace(/\n|\r/g, '')
+      })
     }
   }
 
@@ -217,6 +238,7 @@ export class HomePage {
   closeSerial() {
     usbSerialPort.close(() => {
       this.isOpen()
+      this.receiveDataArray = []
     })
   }
 
@@ -309,5 +331,16 @@ export class HomePage {
     if (role == 'open') {
       this.openSerialPort()
     }
+  }
+
+  // Toast
+  async presentToast(msg?: string) {
+    const toast = await this.toastController.create({
+      message: msg ? msg : 'USB连接似乎已经断开',
+      duration: 2000,
+      color: 'warning',
+      cssClass: 'ion-text-center ion-toast-width',
+    });
+    toast.present();
   }
 }

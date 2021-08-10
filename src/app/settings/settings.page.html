@@ -8,25 +8,25 @@
 <ion-content>
     <ion-list>
         <ion-item>
-            <ion-label position="stacked">波特率</ion-label>
-            <ion-input placeholder="默认为9600" [value]="config.baudRate"></ion-input>
+            <ion-label color="primary" position="stacked">波特率</ion-label>
+            <ion-input type="number" placeholder="默认为9600" [value]="config.baudRate"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label position="stacked">数据位</ion-label>
-            <ion-input placeholder="默认为8" [value]="config.dataBits"></ion-input>
+            <ion-label color="primary" position="stacked">数据位</ion-label>
+            <ion-input type="number" placeholder="默认为8" [value]="config.dataBits"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label position="stacked">停止位</ion-label>
-            <ion-input placeholder="默认为1" [value]="config.stopBits"></ion-input>
+            <ion-label color="primary" position="stacked">停止位</ion-label>
+            <ion-input type="number" placeholder="默认为1" [value]="config.stopBits"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label position="stacked">校验位</ion-label>
-            <ion-input placeholder="默认为0" [value]="config.parity"></ion-input>
+            <ion-label color="primary" position="stacked">校验位</ion-label>
+            <ion-input type="number" placeholder="默认为0" [value]="config.parity"></ion-input>
           </ion-item>
     </ion-list>
 </ion-content>
 <ion-footer class="ion-no-border">
   <ion-toolbar>
-    <div class="ion-text-center">version: {{version}}</div>
+    <div class="ion-text-center version">Version: {{version}}</div>
   </ion-toolbar>
 </ion-footer>
