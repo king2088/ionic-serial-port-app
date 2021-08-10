@@ -1,6 +1,6 @@
 import { SettingsPage } from './../settings/settings.page';
 import { Component, NgZone, ViewChild } from '@angular/core';
-import { ModalController, IonContent, IonRouterOutlet } from '@ionic/angular';
+import { ModalController, IonContent, IonRouterOutlet, AlertController } from '@ionic/angular';
 import { HelpPage } from '../help/help.page';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { Utils } from '../../service/utils';
@@ -24,8 +24,6 @@ export class HomePage {
   isWriterHex: boolean = false
   isAutoSend: boolean = false
   openStatus: boolean = false
-  ms: number = 0
-  msTimer: any
   reSendTime: number = null
   autoSendTimer: any
   @ViewChild(IonContent) content: IonContent
@@ -34,9 +32,31 @@ export class HomePage {
     private routerOutlet: IonRouterOutlet,
     private nativeStorage: NativeStorage,
     private zone: NgZone,
-    private utils: Utils
+    private utils: Utils,
+    private alertController: AlertController
   ) { }
 
+  ionViewDidEnter() {
+    this.initTextareaStyle()
+  }
+  /**
+   * When the app is opened for the first time, the height of ion textarea is 0
+   * So change the textarea element height
+   *
+   * @memberof HomePage
+   */
+  initTextareaStyle() {
+    let textareaWarp: HTMLElement = document.querySelector('.textarea-wrapper')
+    if (textareaWarp.clientHeight < 44) {
+      setTimeout(() => {
+        textareaWarp.style.height = '44px'
+        let textarea: HTMLElement = document.querySelector('textarea')
+        textarea.style.height = '44px'
+      }, 100);
+    }
+  }
+
+  // switch
   toggleChange() {
     if (this.openStatus) {
       this.openSerialPort()
@@ -70,18 +90,17 @@ export class HomePage {
           console.log(this.utils.bytes2HexString(view));
           this.receiveDataArray.push(view)
           this.timer = setTimeout(() => {
+            let now = new Date()
+            let dateMs = now.getMilliseconds()
             this.zone.run(() => {
-              let dateMs = this.ms < 10 ? '00' + this.ms : this.ms < 100 ? '0' + this.ms : this.ms
-              let date = `<span style="color: #2fdf75">${this.utils.formatDate(new Date(), 'hh:mm:ss')}.${dateMs}</span>`
+              let date = `<span style="color: #2fdf75">${this.utils.formatDate(now, 'hh:mm:ss')}.${dateMs} > </span>`
               let result_uint8Array = this.utils.concatUint(Uint8Array, ...this.receiveDataArray)
-              if(!this.utils.bytes2HexString(result_uint8Array)) {
+              if (!this.utils.bytes2HexString(result_uint8Array)) {
                 return
               }
-              this.receiveData += `${date} -> ${this.utils.strDivision(this.utils.bytes2HexString(result_uint8Array), 2)}`
+              this.receiveData += `${date}${this.utils.strDivision(this.utils.bytes2HexString(result_uint8Array), 2)}`
               this.receiveData += `<div style="margin-top:8px"></div>`
               this.receiveLength = this.utils.bytes2HexString(result_uint8Array).length / 2
-              clearInterval(this.msTimer)
-              this.ms = 0
               this.scrollToBottom()
             })
           }, 500)
@@ -106,30 +125,27 @@ export class HomePage {
    * @memberof HomePage
    */
   writerSerial() {
-    if(!this.openStatus) return
-    this.receiveDataArray = []
-    clearInterval(this.msTimer)
-    this.ms = 0
-    this.msTimer = setInterval(() => {
-      this.ms += 1
-      if(this.ms ==1000) {
-        this.ms = 0
+    if (!this.openStatus) {
+      if (this.pack) {
+        this.presentAlert()
       }
-    }, 1)
+      return
+    }
+    this.receiveDataArray = []
+    let now = new Date()
+    let dateMs = now.getMilliseconds()
     if (this.isWriterHex) {
       usbSerialPort.writeHex(this.pack, (res: any) => {
         console.log('writer res: ', res)
-        let dateMs = this.ms < 10 ? '00' + this.ms : this.ms < 100 ? '0' + this.ms : this.ms
-        let date = `<span style="color:#3880ff">${this.utils.formatDate(new Date(), 'hh:mm:ss')}.${dateMs}</span>`
-        this.receiveData += `<div>${date} <- ${this.utils.strDivision(this.pack, 2)}</div>`
+        let date = `<span style="color:#3880ff">${this.utils.formatDate(now, 'hh:mm:ss')}.${dateMs} < </span>`
+        this.receiveData += `<div>${date}${this.utils.strDivision(this.pack, 2)}</div>`
         this.sendLength = this.pack.length / 2
       })
     } else {
       usbSerialPort.write(this.pack, (res: any) => {
         console.log('writer res: ', res)
-        let dateMs = this.ms < 10 ? '00' + this.ms : this.ms < 100 ? '0' + this.ms : this.ms
-        let date = `<span style="color:#3880ff">${this.utils.formatDate(new Date(), 'hh:mm:ss')}.${dateMs}</span>`
-        this.receiveData += `<div>${date} <- ${this.utils.strDivision(this.utils.bufToHex(this.utils.stringToBytes(this.pack)), 2)}</div>`
+        let date = `<span style="color:#3880ff">${this.utils.formatDate(now, 'hh:mm:ss')}.${dateMs} < </span>`
+        this.receiveData += `<div>${date}${this.utils.strDivision(this.utils.bufToHex(this.utils.stringToBytes(this.pack)), 2)}</div>`
         this.sendLength = this.utils.getStringByteLength(this.pack)
       })
     }
@@ -169,6 +185,9 @@ export class HomePage {
   hexChange() {
     if (this.isWriterHex) {
       this.packPlaceholder = '输入Hex字符串'
+      if (this.pack) {
+        this.formatHexString()
+      }
     } else {
       this.packPlaceholder = '输入字符串'
     }
@@ -180,7 +199,7 @@ export class HomePage {
    * @memberof HomePage
    */
   autoSendChange() {
-    if(!this.openStatus) return
+    if (!this.openStatus) return
     if (this.isAutoSend) {
       this.autoSendTimer = setInterval(() => {
         this.writerSerial()
@@ -259,5 +278,36 @@ export class HomePage {
       presentingElement: this.routerOutlet.nativeEl
     })
     return await modal.present()
+  }
+
+  // alert
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: '提示',
+      message: '请先打开串口后再发送，可点击下面的“打开串口”或右上角的开关来打开串口',
+      buttons: [
+        {
+          text: '取消',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Cancel');
+          }
+        }, {
+          text: '打开串口',
+          role: 'open',
+          handler: () => {
+            console.log('Open serial');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+    if (role == 'open') {
+      this.openSerialPort()
+    }
   }
 }
