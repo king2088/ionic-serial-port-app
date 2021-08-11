@@ -1,6 +1,6 @@
 # ionic-serial-port-app
 
-A serial port tool by ionic frame, use plugin is cordova-plugin-usbserialport. Is only run in Android, iOS is not supported.
+A serial port tool by ionic frame, use plugin is [cordova-plugin-usbserialport](https://github.com/king2088/cordova-plugin-usbserialport). Is only run in Android, iOS is not supported.
 <!-- ![alt Review](./view.jpeg) -->
 <img src="./view.jpeg" width="400" alt="review">
 
