@@ -12,19 +12,19 @@
     </ion-list-header>
     <ion-item>
       <ion-label color="primary" position="stacked">波特率</ion-label>
-      <ion-input type="number" placeholder="默认为9600" [value]="config.baudRate"></ion-input>
+      <ion-input type="number" placeholder="默认为9600" [(ngModel)]="config.baudRate"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label color="primary" position="stacked">数据位</ion-label>
-      <ion-input type="number" placeholder="默认为8" [value]="config.dataBits"></ion-input>
+      <ion-input type="number" placeholder="默认为8" [(ngModel)]="config.dataBits"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label color="primary" position="stacked">停止位</ion-label>
-      <ion-input type="number" placeholder="默认为1" [value]="config.stopBits"></ion-input>
+      <ion-input type="number" placeholder="默认为1" [(ngModel)]="config.stopBits"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label color="primary" position="stacked">校验位</ion-label>
-      <ion-input type="number" placeholder="默认为0" [value]="config.parity"></ion-input>
+      <ion-input type="number" placeholder="默认为0" [(ngModel)]="config.parity"></ion-input>
     </ion-item>
   </ion-list>
   <ion-button class="btn-class" expand="block" (click)="setSerialPortConfig()">保存串口配置</ion-button>
@@ -35,19 +35,6 @@
     <ion-item lines="full">
       <ion-label color="primary" position="stacked">点击对应的颜色可以切换背景颜色</ion-label>
       <ion-row style="width: 100%;">
-        <!-- <ion-col size="1" class="color color-white"      (click)="setBackgroundColor('color-white')"></ion-col>
-        <ion-col size="1" class="color color-red"        (click)="setBackgroundColor('color-red')"></ion-col>
-        <ion-col size="1" class="color color-blue"       (click)="setBackgroundColor('color-blue')"></ion-col>
-        <ion-col size="1" class="color color-cyan"       (click)="setBackgroundColor('color-cyan')"></ion-col>
-        <ion-col size="1" class="color color-yellow"     (click)="setBackgroundColor('color-yellow')"></ion-col>
-        <ion-col size="1" class="color color-green"      (click)="setBackgroundColor('color-green')"></ion-col>
-        <ion-col size="1" class="color color-black"      (click)="setBackgroundColor('color-black')"></ion-col>
-        <ion-col size="1" class="color color-cornsilk"   (click)="setBackgroundColor('color-cornsilk')"></ion-col>
-        <ion-col size="1" class="color color-darkviolet" (click)="setBackgroundColor('color-darkviolet')"></ion-col>
-        <ion-col size="1" class="color color-gainsboro"  (click)="setBackgroundColor('color-gainsboro')"></ion-col>
-        <ion-col size="1" class="color color-maroon"     (click)="setBackgroundColor('color-maroon')"></ion-col>
-        <ion-col size="1" class="color color-pink"       (click)="setBackgroundColor('color-pink')"></ion-col> -->
-        
         <ng-container *ngFor="let item of colorList">
           <ion-col size="1" [class]="'color '+ item" (click)="setBackgroundColor(item)"></ion-col>
         </ng-container>

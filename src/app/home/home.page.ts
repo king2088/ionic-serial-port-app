@@ -294,9 +294,14 @@ export class HomePage {
       swipeToClose: true,
       presentingElement: this.routerOutlet.nativeEl
     })
-    modal.onDidDismiss().then(async ()=>{
-      // 关闭串口再重新开启
-      this.closeSerial(true)
+    modal.onDidDismiss().then(async (params: any)=>{
+      let {data} = params
+      console.log('setting dismiss data', data, data && data.configIsChange && this.openStatus);
+      
+      if(data && data.configIsChange && this.openStatus) {
+        // 关闭串口再重新开启
+        this.closeSerial(true)
+      }
       // 设置背景颜色
       this.backgroundClass = await this.nativeStorage.getItem('backgroundClass')
     })

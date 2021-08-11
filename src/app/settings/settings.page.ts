@@ -1,6 +1,6 @@
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { AppVersion } from '@ionic-native/app-version/ngx';
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 
@@ -11,7 +11,8 @@ import { ModalController } from '@ionic/angular';
 })
 export class SettingsPage {
   version: any = ''
-  config: object = {}
+  config: any = {}
+  configTemp: object = {}
   colorList: any[] = [
     'color-white',
     'color-red',
@@ -29,10 +30,31 @@ export class SettingsPage {
   constructor(
     private appVersion: AppVersion,
     private nativeStorage: NativeStorage,
-    private modalController: ModalController
-  ) {
+    private modalController: ModalController,
+    private zone: NgZone
+  ) { }
+
+  ionViewWillEnter() {
+    this.initBackgroundColor()
     this.getVersion()
     this.getSerialPortConfig()
+  }
+
+  async initBackgroundColor() {
+    let backgroundClass = await this.nativeStorage.getItem('backgroundClass')
+    console.log('settings backagroun class', backgroundClass);
+
+    let activeClass = 'color-active'
+    this.colorList.forEach((item, index) => {
+      if (item == backgroundClass) {
+        console.log('have same');
+        this.zone.run(() => {
+          this.colorList[index] = `${item} ${activeClass}`
+        })
+      }
+    })
+    console.log('color list', this.colorList);
+
   }
 
   /**
@@ -51,12 +73,16 @@ export class SettingsPage {
    */
   async getSerialPortConfig() {
     this.config = await this.nativeStorage.getItem('config')
+    this.configTemp = Object.assign({}, this.config)
     console.log('config', this.config);
   }
 
   async setSerialPortConfig() {
+    console.log('save config', JSON.stringify(this.config), JSON.stringify(this.configTemp));
+    
     await this.nativeStorage.setItem('config', this.config)
-    this.modalController.dismiss()
+    let configIsCHange = JSON.stringify(this.configTemp) != JSON.stringify(this.config)
+    this.modalController.dismiss({ configIsChange: configIsCHange })
   }
 
   async setBackgroundColor(className: string) {
