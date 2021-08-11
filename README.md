@@ -1,7 +1,8 @@
 # ionic-serial-port-app
 
 A serial port tool by ionic frame, use plugin is cordova-plugin-usbserialport. Is only run in Android, iOS is not supported.
-![alt Review](./view.jpeg)
+<!-- ![alt Review](./view.jpeg) -->
+<img src="./view.jpeg" width="400">
 **Upcoming features**  
 
 - Internationalization: Chinese/English/Korean/Thai
@@ -48,15 +49,23 @@ ionic cordova build android --prod --release
 #### Generate signature file  
 
 ```bash
-keytool -genkey -v -keystore key.keystore -alias you_name -keyalg RSA -keysize 2048 -validity 10000
+keytool -genkey -v -keystore key.keystore -alias tony -keyalg RSA -keysize 2048 -validity 10000
 ```
 
-You can modify alias 'you_name' to any words
+You can modify alias 'tony' to any words
+
+I set the key password is '123456'
+
+JKS key to PKCS12 key
+
+```bash
+keytool -importkeystore -srckeystore key.keystore -destkeystore key.keystore -deststoretype pkcs12
+```
 
 #### APK Sign
 
 Generate a new signed app-signed.apk file in the root directory
 
 ```shell
-jarsigner -verbose -keystore .\release-key.jks -signedjar app-signed.apk .\platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk kexin -tsa http://sha256timestamp.ws.symantec.com/sha256/timestamp
+jarsigner -verbose -keystore ./release-key.jks -signedjar app-signed.apk ./platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk tony -tsa http://sha256timestamp.ws.symantec.com/sha256/timestamp
 ```
