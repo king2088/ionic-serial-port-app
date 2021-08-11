@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { HelpPage } from './help.page';
 
 @NgModule({
   imports: [
@@ -10,6 +9,6 @@ import { HelpPage } from './help.page';
     FormsModule,
     IonicModule,
   ],
-  declarations: [HelpPage]
+  declarations: []
 })
 export class HelpPageModule {}

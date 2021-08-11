@@ -13,10 +13,11 @@ import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 import { Utils } from '../service/utils';
 import { SettingsPage } from './settings/settings.page';
 import { FormsModule } from '@angular/forms';
+import { HelpPage } from './help/help.page';
 
 @NgModule({
-  declarations: [AppComponent, SettingsPage],
-  entryComponents: [SettingsPage],
+  declarations: [AppComponent, SettingsPage, HelpPage],
+  entryComponents: [SettingsPage, HelpPage],
   imports: [BrowserModule, IonicModule.forRoot({mode: 'ios'}), AppRoutingModule, FormsModule],
   providers: [StatusBar, AppVersion, NativeStorage, BackgroundMode, Utils, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
