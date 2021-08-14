@@ -23,21 +23,22 @@
 <ion-footer class="ion-no-border">
     <ion-toolbar class="footer-frist-toolbar" color="light">
         <ion-row class="ion-text-center">
-            <ion-col size="3">发送:{{sendLength}}B</ion-col>
-            <ion-col size="3">接收:{{receiveLength}}B</ion-col>
+            <ion-col size="3">{{'SEND_BIT' | translate}}:{{sendLength}}B</ion-col>
+            <ion-col size="3">{{'RECEIVE_BIT' | translate}}:{{receiveLength}}B</ion-col>
             <ion-col size="3" (click)="clearData()">
-                <ion-icon style="margin: 0 2px -2px 0;" name="trash"></ion-icon>清空
+                <ion-icon style="margin: 0 2px -2px 0;" name="trash"></ion-icon>{{'CLEAR' | translate}}
             </ion-col>
             <ion-col size="3" (click)="scrollToTop()">
-                <ion-icon style="margin: 0 2px -2px 0;" name="arrow-up-outline"></ion-icon>返回顶部
+                <ion-icon style="margin: 0 2px -2px 0;" name="arrow-up-outline"></ion-icon>{{'BACK_TO_TOP' | translate}}
             </ion-col>
         </ion-row>
     </ion-toolbar>
     <ion-toolbar>
         <ion-item>
-            <ion-label position="stacked">指令发送</ion-label>
-            <ion-textarea #textarea style="max-height:90px" [autoGrow]="true" id="textarea" [rows]="1" [(ngModel)]="pack"
-                [placeholder]="packPlaceholder" (ionChange)="formatHexString()" (ionBlur)="formatHexString()"></ion-textarea>
+            <ion-label position="stacked">{{'SEND_CONTENT' | translate}}</ion-label>
+            <ion-textarea #textarea style="max-height:90px" [autoGrow]="true" id="textarea" [rows]="1"
+                [(ngModel)]="pack" [placeholder]="packPlaceholder" (ionChange)="formatHexString()"
+                (ionBlur)="formatHexString()"></ion-textarea>
         </ion-item>
         <ion-buttons slot="end">
             <ion-button class="send-btn" (click)="writerSerial()">
@@ -48,13 +49,16 @@
     <ion-toolbar>
         <ion-row class="ion-text-center">
             <ion-col size="3">
-                <ion-checkbox class="checkbox-margin" [(ngModel)]="isWriterHex" (ionChange)="hexChange()"></ion-checkbox><span class="checkbox-span">HEX</span>
+                <ion-checkbox class="checkbox-margin" [(ngModel)]="isWriterHex" (ionChange)="hexChange()">
+                </ion-checkbox><span class="checkbox-span">Hex</span>
             </ion-col>
             <ion-col size="4">
-                <ion-checkbox class="checkbox-margin" [(ngModel)]="isAutoSend"(ionChange)="autoSendChange()" ></ion-checkbox><span class="checkbox-span">自动重发</span>
+                <ion-checkbox class="checkbox-margin" [(ngModel)]="isAutoSend" (ionChange)="autoSendChange()">
+                </ion-checkbox><span class="checkbox-span">{{'AUTO_RESEND' | translate}}</span>
             </ion-col>
             <ion-col size="5">
-                <ion-input class="resend-time-input" placeholder="默认重发:1000ms" [(ngModel)]="reSendTime"></ion-input>
+                <ion-input type="number" class="resend-time-input" placeholder="{{'RESEND_TIME' | translate}}"
+                    [(ngModel)]="reSendTime"></ion-input>
             </ion-col>
         </ion-row>
     </ion-toolbar>

@@ -4,11 +4,11 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule
-  ],
-  declarations: [],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule
+    ],
+    declarations: [],
 })
-export class HomePageModule {}
+export class HomePageModule { }

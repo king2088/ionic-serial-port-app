@@ -1,0 +1,17 @@
+{
+    "SERIAL_DEVICE_TITLE": "串口设备",
+    "SEND_BIT": "发送",
+    "RECEIVE_BIT": "接收",
+    "CLEAR": "清空",
+    "BACK_TO_TOP": "返回顶部",
+    "TEXTAERA_DEFUALT_PLACEHOLDER": "输入字符串",
+    "TEXTAERA_HEX_PLACEHOLDER": "输入Hex字符串",
+    "SEND_CONTENT": "指令发送",
+    "AUTO_RESEND": "自动重发",
+    "RESEND_TIME": "默认重发:1000ms",
+    "TIPS": "提示",
+    "ALERT_MESSAGE": "请先打开串口后再发送，可点击下面的“打开串口”或右上角的开关来打开串口",
+    "CANCEL": "取消",
+    "OPEN_SERIAL": "打开串口",
+    "USB_DISCONNECTED": "USB连接似乎已经断开"
+}
