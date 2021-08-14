@@ -1,39 +1,41 @@
 <ion-header [translucent]="true">
     <ion-toolbar color="primary">
         <ion-title>
-            设置
+            {{'SETTING' | translate}}
         </ion-title>
     </ion-toolbar>
 </ion-header>
 <ion-content>
     <ion-list>
         <ion-list-header>
-            <ion-label>串口配置</ion-label>
+            <ion-label>{{'SERIAL_PORT_CONFIGURATION' | translate}}</ion-label>
         </ion-list-header>
         <ion-item>
-            <ion-label color="primary" position="stacked">波特率</ion-label>
+            <ion-label color="primary" position="stacked">{{'BAUD_RATE' | translate}}</ion-label>
             <ion-input type="number" placeholder="默认为9600" [(ngModel)]="config.baudRate"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label color="primary" position="stacked">数据位</ion-label>
+            <ion-label color="primary" position="stacked">{{'DATA_BITS' | translate}}</ion-label>
             <ion-input type="number" placeholder="默认为8" [(ngModel)]="config.dataBits"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label color="primary" position="stacked">停止位</ion-label>
+            <ion-label color="primary" position="stacked">{{'STOP_BITS' | translate}}</ion-label>
             <ion-input type="number" placeholder="默认为1" [(ngModel)]="config.stopBits"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label color="primary" position="stacked">校验位</ion-label>
+            <ion-label color="primary" position="stacked">{{'PARITY' | translate}}</ion-label>
             <ion-input type="number" placeholder="默认为0" [(ngModel)]="config.parity"></ion-input>
         </ion-item>
     </ion-list>
-    <ion-button class="btn-class" expand="block" (click)="setSerialPortConfig()">保存串口配置</ion-button>
+    <ion-button class="btn-class" expand="block" (click)="setSerialPortConfig()">{{'SAVE_SERIAL_PORT_CONFIGURATION' |
+        translate}}</ion-button>
     <ion-list>
         <ion-list-header>
-            <ion-label>颜色配置</ion-label>
+            <ion-label>{{'COLOR_CONFIGURATION' | translate}}</ion-label>
         </ion-list-header>
         <ion-item lines="full">
-            <ion-label color="primary" position="stacked">点击对应的颜色可以切换背景颜色</ion-label>
+            <ion-label color="primary" position="stacked">{{'CLICK_THE_COLOR_BELOW_TO_SWITCH_THE_BACKGROUND' |
+                translate}}</ion-label>
             <ion-row style="width: 100%;">
                 <ng-container *ngFor="let item of colorList">
                     <ion-col size="1" [class]="'color '+ item" (click)="setBackgroundColor(item)"></ion-col>
@@ -45,6 +47,6 @@
 </ion-content>
 <ion-footer class="ion-no-border">
     <ion-toolbar>
-        <div class="ion-text-center version">Version: {{version}}</div>
+        <div class="ion-text-center version">{{'VERSION' | translate}}: {{version}}</div>
     </ion-toolbar>
 </ion-footer>

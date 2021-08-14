@@ -13,5 +13,17 @@
     "ALERT_MESSAGE": "请先打开串口后再发送，可点击下面的“打开串口”或右上角的开关来打开串口",
     "CANCEL": "取消",
     "OPEN_SERIAL": "打开串口",
-    "USB_DISCONNECTED": "USB连接似乎已经断开"
+    "USB_DISCONNECTED": "USB连接似乎已经断开",
+    "SETTING": "设置",
+    "SERIAL_PORT_CONFIGURATION": "串口配置",
+    "BAUD_RATE": "波特率",
+    "DATA_BITS": "数据位",
+    "STOP_BITS": "停止位",
+    "PARITY": "校验位",
+    "SAVE_SERIAL_PORT_CONFIGURATION": "保存串口配置",
+    "COLOR_CONFIGURATION": "颜色配置",
+    "CLICK_THE_COLOR_BELOW_TO_SWITCH_THE_BACKGROUND": "点击对应的颜色可以切换背景颜色",
+    "VERSION": "当前版本",
+    "HELP": "USPT使用帮助",
+    "HELP_CONTENT": "<p>USPT（USB Serial Port Tool.即USB串口通信工具）是用于Android端常见USB（包括Type-C）转串口设备通信调试的工具。</p><p>目前USPT支持市面上大多数USB串口驱动，其中包含了Cdc/Ch34/Cp21xx/Ftdi/Prolific常见芯片驱动。</p><p><img class='img' src='../../assets/serialport.png' /></p><p>假如你在使用的过程中遇到问题，或者由更好的改进意见，请直接发送电子邮件与我联系。</p><p><strong>电子邮件地址：<a href=mailto:king6180@gmail.com>king6180@gmail.com</a></strong></p><p class='ion-text-right'>USPT感谢您的使用</p>"
 }
