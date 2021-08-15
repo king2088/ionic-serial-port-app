@@ -12,19 +12,20 @@
         </ion-list-header>
         <ion-item>
             <ion-label color="primary" position="stacked">{{'BAUD_RATE' | translate}}</ion-label>
-            <ion-input type="number" placeholder="默认为9600" [(ngModel)]="config.baudRate"></ion-input>
+            <ion-input type="number" placeholder="{{'DEFAULT' | translate}}9600" [(ngModel)]="config.baudRate">
+            </ion-input>
         </ion-item>
         <ion-item>
             <ion-label color="primary" position="stacked">{{'DATA_BITS' | translate}}</ion-label>
-            <ion-input type="number" placeholder="默认为8" [(ngModel)]="config.dataBits"></ion-input>
+            <ion-input type="number" placeholder="{{'DEFAULT' | translate}}8" [(ngModel)]="config.dataBits"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label color="primary" position="stacked">{{'STOP_BITS' | translate}}</ion-label>
-            <ion-input type="number" placeholder="默认为1" [(ngModel)]="config.stopBits"></ion-input>
+            <ion-input type="number" placeholder="{{'DEFAULT' | translate}}1" [(ngModel)]="config.stopBits"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label color="primary" position="stacked">{{'PARITY' | translate}}</ion-label>
-            <ion-input type="number" placeholder="默认为0" [(ngModel)]="config.parity"></ion-input>
+            <ion-input type="number" placeholder="{{'DEFAULT' | translate}}0" [(ngModel)]="config.parity"></ion-input>
         </ion-item>
     </ion-list>
     <ion-button class="btn-class" expand="block" (click)="setSerialPortConfig()">{{'SAVE_SERIAL_PORT_CONFIGURATION' |
@@ -42,6 +43,27 @@
                 </ng-container>
 
             </ion-row>
+        </ion-item>
+    </ion-list>
+    <ion-list>
+        <ion-list-header>
+            <ion-label>{{'LANGUAGE_CONFIGURATION' | translate}}</ion-label>
+        </ion-list-header>
+        <ion-item lines="full">
+            <ion-label>{{'LANGUAGE' | translate}}</ion-label>
+            <ion-select interface="popover" [(ngModel)]="lang" cancelText="{{'CANCEL' | translate}}"
+                okText="{{'CONFIRM' | translate}}" (ionChange)="setLanguage()">
+                <ion-select-option value="zh">中文</ion-select-option>
+                <ion-select-option value="en">English</ion-select-option>
+                <ion-select-option value="fr">français</ion-select-option>
+                <ion-select-option value="de">Deutsche</ion-select-option>
+                <ion-select-option value="it">Italia</ion-select-option>
+                <ion-select-option value="ja">日本</ion-select-option>
+                <ion-select-option value="ko">한국어</ion-select-option>
+                <ion-select-option value="ru">Россия</ion-select-option>
+                <ion-select-option value="th">ประเทศไทย</ion-select-option>
+                <ion-select-option value="vi">Tiếng Việt</ion-select-option>
+            </ion-select>
         </ion-item>
     </ion-list>
 </ion-content>

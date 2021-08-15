@@ -2,6 +2,7 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Component, NgZone } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -28,10 +29,12 @@ export class SettingsPage {
         'color-maroon',
         'color-pink',
     ];
+    lang: any;
     constructor(
         private appVersion: AppVersion,
         private nativeStorage: NativeStorage,
         private modalController: ModalController,
+        private translate: TranslateService,
         private zone: NgZone
     ) { }
 
@@ -39,6 +42,7 @@ export class SettingsPage {
         this.initBackgroundColor();
         this.getVersion();
         this.getSerialPortConfig();
+        this.getLanguage();
     }
 
     async initBackgroundColor() {
@@ -47,7 +51,7 @@ export class SettingsPage {
 
         const activeClass = 'color-active';
         this.colorList.forEach((item, index) => {
-            if (item == backgroundClass) {
+            if (item === backgroundClass) {
                 console.log('have same');
                 this.zone.run(() => {
                     this.colorList[index] = `${item} ${activeClass}`;
@@ -79,16 +83,24 @@ export class SettingsPage {
     }
 
     async setSerialPortConfig() {
-        console.log('save config', JSON.stringify(this.config), JSON.stringify(this.configTemp));
-
         await this.nativeStorage.setItem('config', this.config);
-        const configIsCHange = JSON.stringify(this.configTemp) != JSON.stringify(this.config);
+        const configIsCHange = JSON.stringify(this.configTemp) !== JSON.stringify(this.config);
         this.modalController.dismiss({ configIsChange: configIsCHange });
     }
 
     async setBackgroundColor(className: string) {
         await this.nativeStorage.setItem('backgroundClass', className);
         this.modalController.dismiss();
+    }
+
+    async getLanguage() {
+        this.lang = await this.nativeStorage.getItem('locale');
+    }
+
+    async setLanguage() {
+        // await this.nativeStorage.setItem('locale', this.lang);
+        this.translate.setDefaultLang(this.lang);
+        this.translate.use(this.lang);
     }
 
 }

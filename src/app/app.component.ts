@@ -77,13 +77,7 @@ export class AppComponent {
     // init language
     initLocale() {
         const langArray: any = [
-            'af', // 荷兰语
-            'ar', // 阿拉伯语
-            'hy', // 亚美尼亚
-            'be', // 白俄罗斯
             'zh', // 中国
-            'cs', // 捷克
-            'da', // 丹麦
             'en', // 英语
             'fr', // 法语
             'de', // 德国
@@ -91,8 +85,6 @@ export class AppComponent {
             'ja', // 日语
             'ko', // 韩语
             'ru', // 俄罗斯
-            'es', // 西班牙
-            'sv', // 瑞典
             'th', // 泰国
             'vi', // 越南
         ];
@@ -106,7 +98,13 @@ export class AppComponent {
             regString += item + '|';
         }
         regString = regString.substring(0, regString.length - 1);
-        this.translate.use(browserLang.match(RegExp(regString)) ? browserLang : 'en');
+        const currentLanguage = browserLang.match(RegExp(regString)) ? browserLang : 'en';
+        this.translate.use(currentLanguage);
+        this.nativeStorage.getItem('locale').then(locale => {
+            this.translate.use(locale);
+        }, err => {
+            this.nativeStorage.setItem('locale', currentLanguage);
+        });
     }
 
     // active hardware back button
