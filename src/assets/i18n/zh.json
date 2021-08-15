@@ -6,6 +6,7 @@
     "BACK_TO_TOP": "返回顶部",
     "TEXTAERA_DEFUALT_PLACEHOLDER": "输入字符串",
     "TEXTAERA_HEX_PLACEHOLDER": "输入Hex字符串",
+    "NO_DEVICE_CONNECTED": "未连接任何USB设备",
     "SEND_CONTENT": "指令发送",
     "AUTO_RESEND": "自动重发",
     "RESEND_TIME": "默认重发:1000ms",

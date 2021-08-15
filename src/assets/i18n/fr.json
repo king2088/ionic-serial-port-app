@@ -6,6 +6,7 @@
     "BACK_TO_TOP": "Haut",
     "TEXTAERA_DEFUALT_PLACEHOLDER": "Entrez la chaîne",
     "TEXTAERA_HEX_PLACEHOLDER": "Entrez la chaîne hexadécimale",
+    "NO_DEVICE_CONNECTED": "Aucun périphérique USB connecté",
     "SEND_CONTENT": "Commande à envoyer",
     "AUTO_RESEND": "Renvoyer",
     "RESEND_TIME": "Durée : 1000 ms",

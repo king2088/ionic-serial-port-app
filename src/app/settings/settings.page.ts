@@ -98,7 +98,7 @@ export class SettingsPage {
     }
 
     async setLanguage() {
-        // await this.nativeStorage.setItem('locale', this.lang);
+        await this.nativeStorage.setItem('locale', this.lang);
         this.translate.setDefaultLang(this.lang);
         this.translate.use(this.lang);
     }

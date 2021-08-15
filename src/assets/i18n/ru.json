@@ -6,6 +6,7 @@
     "BACK_TO_TOP": "вершина",
     "TEXTAERA_DEFUALT_PLACEHOLDER": "Введите строку",
     "TEXTAERA_HEX_PLACEHOLDER": "Введите Hex строку",
+    "NO_DEVICE_CONNECTED": "USB-устройство не подключено",
     "SEND_CONTENT": "Команда на отправку",
     "AUTO_RESEND": "Bремя",
     "RESEND_TIME": "Время: 1000ms",

@@ -6,6 +6,7 @@
     "BACK_TO_TOP": "Hàng đầu",
     "TEXTAERA_DEFUALT_PLACEHOLDER": "Nhập chuỗi",
     "TEXTAERA_HEX_PLACEHOLDER": "Nhập chuỗi Hex",
+    "NO_DEVICE_CONNECTED": "Không có thiết bị USB nào được kết nối",
     "SEND_CONTENT": "Lệnh gửi",
     "AUTO_RESEND": "Gửi lại",
     "RESEND_TIME": "Thời gian: 1000ms",

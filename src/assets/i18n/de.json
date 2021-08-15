@@ -5,6 +5,7 @@
     "CLEAR": "klar",
     "BACK_TO_TOP": "Oben",
     "TEXTAERA_DEFUALT_PLACEHOLDER": "Zeichenfolge eingeben",
+    "NO_DEVICE_CONNECTED": "Kein USB-Gerät angeschlossen",
     "TEXTAERA_HEX_PLACEHOLDER": "Hex-String eingeben",
     "SEND_CONTENT": "Befehl zum Senden",
     "AUTO_RESEND": "Intervall",

@@ -6,6 +6,7 @@
     "BACK_TO_TOP": "맨 위로",
     "TEXTAERA_DEFUALT_PLACEHOLDER": "문자열 입력",
     "TEXTAERA_HEX_PLACEHOLDER": "16진수 문자열 입력",
+    "NO_DEVICE_CONNECTED": "연결된 USB 장치가 없습니다",
     "SEND_CONTENT": "전송 명령",
     "AUTO_RESEND": "재전송",
     "RESEND_TIME": "시간: 1000ms",

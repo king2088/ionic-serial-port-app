@@ -20,7 +20,7 @@ export class HomePage {
     receiveLength = 0;
     sendLength = 0;
     pack: any = '';
-    packPlaceholder = '输入字符串';
+    packPlaceholder: string;
     timer: any = null;
     isWriterHex = false;
     isAutoSend = false;
@@ -135,10 +135,10 @@ export class HomePage {
             if (this.openStatus) {
                 this.zone.run(() => {
                     this.openStatus = false;
-                    this.title = '串口设备';
+                    this.title = this.translate.instant('SERIAL_DEVICE_TITLE');
                 });
             }
-            this.presentToast('未连接任何USB设备');
+            this.presentToast(this.translate.instant('NO_DEVICE_CONNECTED'));
         });
     }
 

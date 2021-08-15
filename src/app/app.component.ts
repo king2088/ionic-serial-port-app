@@ -99,11 +99,11 @@ export class AppComponent {
         }
         regString = regString.substring(0, regString.length - 1);
         const currentLanguage = browserLang.match(RegExp(regString)) ? browserLang : 'en';
-        this.translate.use(currentLanguage);
         this.nativeStorage.getItem('locale').then(locale => {
             this.translate.use(locale);
         }, err => {
             this.nativeStorage.setItem('locale', currentLanguage);
+            this.translate.use(currentLanguage);
         });
     }
 

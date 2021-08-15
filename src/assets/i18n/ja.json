@@ -6,6 +6,7 @@
     "BACK_TO_TOP": "上",
     "TEXTAERA_DEFUALT_PLACEHOLDER": "文字列を入力してください",
     "TEXTAERA_HEX_PLACEHOLDER": "16進文字列を入力してください",
+    "NO_DEVICE_CONNECTED": "USBデバイスが接続されていません",
     "SEND_CONTENT": "送信するコマンド",
     "AUTO_RESEND": "再送",
     "RESEND_TIME": "時間:1000ms",

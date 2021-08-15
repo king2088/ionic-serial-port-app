@@ -6,6 +6,7 @@
     "BACK_TO_TOP": "Torna all'inizio",
     "TEXTAERA_DEFUALT_PLACEHOLDER": "Inserisci stringa",
     "TEXTAERA_HEX_PLACEHOLDER": "Inserisci stringa esadecimale",
+    "NO_DEVICE_CONNECTED": "Nessun dispositivo USB collegato",
     "SEND_CONTENT": "Comando per inviare",
     "AUTO_RESEND": "Invia di nuovo",
     "RESEND_TIME": "Tempo: 1000 ms",

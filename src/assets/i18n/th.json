@@ -6,6 +6,7 @@
     "BACK_TO_TOP": "กลับสู่ด้านบน",
     "TEXTAERA_DEFUALT_PLACEHOLDER": "ป้อนสตริง",
     "TEXTAERA_HEX_PLACEHOLDER": "ป้อนสตริงฐานสิบหก",
+    "NO_DEVICE_CONNECTED": "ไม่มีอุปกรณ์ USB เชื่อมต่อ",
     "SEND_CONTENT": "คำสั่งในการส่ง",
     "AUTO_RESEND": "ส่งใหม่",
     "RESEND_TIME": "เวลา: 1000ms",
