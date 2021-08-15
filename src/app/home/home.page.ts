@@ -38,7 +38,7 @@ export class HomePage {
         private utils: Utils,
         private alertController: AlertController,
         private toastController: ToastController,
-        private translate: TranslateService,
+        public translate: TranslateService,
     ) {
         this.title = this.translate.instant('SERIAL_DEVICE_TITLE');
         this.packPlaceholder = this.translate.instant('TEXTAERA_DEFUALT_PLACEHOLDER');
@@ -51,6 +51,11 @@ export class HomePage {
             this.backgroundClass = cssClass;
         }, () => {
             this.backgroundClass = '';
+        });
+        // Switch language listen
+        this.translate.onLangChange.subscribe(() => {
+            this.title = this.translate.instant('SERIAL_DEVICE_TITLE');
+            this.packPlaceholder = this.translate.instant('TEXTAERA_DEFUALT_PLACEHOLDER');
         });
     }
     /**
